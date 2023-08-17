@@ -1,0 +1,78 @@
+// how many ways exactly one digit can be removed from one of the strings
+
+// so basically we have to try removing each digit from each word:
+// then compare that new removed digit word to the second word
+// check if the result makes s < t
+
+/*
+ab1c 1zz456
+ab2c 1zz456
+ab12c zz56
+ab12c zz46
+ab12c zz45
+
+*/
+
+int solution(String s, String t) {
+    // make a list copying both strings
+    List<Character> sList = new ArrayList<>();
+    List<Character> tList = new ArrayList<>();
+    List<Integer> indexSList = new ArrayList<>();
+    List<Integer> indexTList = new ArrayList<>();
+    
+    copyStrings(s, indexSList, sList);
+    copyStrings(t, indexTList, tList);
+    
+    // check number of lexic passes
+    int passes = 0;
+    
+    for (int x: indexSList){
+        char i = sList.get(x);
+        sList.remove(x);
+        if (checkLexic(sList, tList)) passes++;
+        sList.add(x, i);
+    }
+    
+    for (int x: indexTList){
+        char i = tList.get(x);
+        tList.remove(x);
+        if (checkLexic(sList, tList)) passes++;
+        tList.add(x, i);
+    }
+    return passes;
+    
+}
+
+void copyStrings(String s, List<Integer> indexSList, List<Character> sList){
+    // make list of indices of integers
+    // make list of each string 
+    for (int i = 0; i < s.length(); i++){
+        if (Character.isDigit(s.charAt(i))){
+            indexSList.add(i);
+        }
+        sList.add((s.charAt(i))); 
+       
+    }
+}
+
+boolean checkLexic(List<Character> sList, List<Character> tList){
+    int i = 0;
+    int j = 0;
+    
+    while (i != sList.size() && j != tList.size()){
+        if (sList.get(j) < tList.get(i)){
+            return true;
+        }
+        if (tList.get(i) < sList.get(j)){
+            return false;
+        }
+        i++;
+        j++;
+    }
+    
+    if (j == tList.size()){
+        return false;
+    }
+    
+    return true;
+}
