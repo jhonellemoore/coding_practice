@@ -30,6 +30,19 @@ minimum # of turns for step 2......16
 Coin change
 
 Find shortest path using bfs from 1 to 16
+
+shortest path
+minimum turns
+min cost
+min anything
+
+think of BFS
+Try to visualize problems as a graph
+Solve using:
+BFS
+DFS with/without memo
+Backtracking
+DP 
  */
 
 class Solution {
@@ -76,3 +89,7 @@ class Solution {
     }
   }
 }
+
+// Your previous Plain Text content is preserved below:
+
+
