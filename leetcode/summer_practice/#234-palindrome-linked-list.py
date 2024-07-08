@@ -18,13 +18,13 @@ class Solution(object):
         :rtype: bool
         """
         def reverseList(middle):
-            prev = middle
-            curr = middle.next
-            while curr != None:
+            prev = None
+            curr = middle
+            while curr is not None:
                 next_node = curr.next
                 curr.next = prev
                 prev = curr
-                curr = next_node    
+                curr = next_node   
             return prev
 
         # Goal = we want the slow pointer to end up in the middle of the list
@@ -38,8 +38,7 @@ class Solution(object):
 
         # reverse from middle to end
         new_end = reverseList(slow)
-        
-        while head <= new_end:
+        while head is not None:
             if head.val != new_end.val:
                 return False
             head = head.next
